@@ -19,7 +19,7 @@ jobs:
         with:
           source: "."
           target: "/var/www/html/cicd/actions_apps"
-      - uses: myapps/ssh-key-action@v2
+      - uses: myapps/ssh-key-actions@v2
         name: Executing remote command
         with:
           HOST: ${{ secrets.HOST }}
