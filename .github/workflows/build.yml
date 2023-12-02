@@ -18,7 +18,7 @@ jobs:
         run: ssh-keyscan -H ${{ secrets.HOST }} >> cd /root/.ssh/known_hosts
       - name: sync
         run: |
-        rsync -avHl cd /var/www/html/cicd/actions_apps ${{ secrets.USERNAME }}@${{ secrets.HOST }}:cd /var/www/html/cicd/${{ github.event.repository.name }}
+        rsync -avHl cd /var/www/html/cicd/actions_apps ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/var/www/html/cicd/${{ github.event.repository.name }}
           
       #   uses: actions/setup-ssh-key@v3
       #   env:
