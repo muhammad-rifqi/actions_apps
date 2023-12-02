@@ -10,24 +10,34 @@ jobs:
       - name: Copy repository contents via git
         uses: actions/checkout@v3
       - name: Install SSH Key
-        uses: actions/setup-ssh-key@v3
-        env:
-          HOST: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          PORT: ${{ secrets.PORT }}
-          KEY: ${{ secrets.SSH_KEY }}
+        uses: shimataro/ssh-key-action@v2
         with:
-          source: "./"
-          target: "/var/www/cicd/actions_apps"
+          key: ${{ secrets.SSH_KEY }} 
+          known_hosts: 'hello-world'
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      - name: sync
+        run: |
+          rsync -avz . ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/cicd/${{ github.event.repository.name }}
+          
+      #   uses: actions/setup-ssh-key@v3
+      #   env:
+      #     HOST: ${{ secrets.HOST }}
+      #     USERNAME: ${{ secrets.USERNAME }}
+      #     PORT: ${{ secrets.PORT }}
+      #     KEY: ${{ secrets.SSH_KEY }}
+      #   with:
+      #     source: "./"
+      #     target: "/var/www/cicd/actions_apps"
 
-      - name: Executing remote command
-        uses: appleboy/ssh-action@master
-        with:
-          HOST: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          PORT: ${{ secrets.PORT }}
-          KEY: ${{ secrets.SSH_KEY }}
-          script: ls
+      # - name: Executing remote command
+      #   uses: actions/setup-ssh-key@v3
+      #   with:
+      #     HOST: ${{ secrets.HOST }}
+      #     USERNAME: ${{ secrets.USERNAME }}
+      #     PORT: ${{ secrets.PORT }}
+      #     KEY: ${{ secrets.SSH_KEY }}
+      #     script: ls
 
 
 
