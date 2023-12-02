@@ -36,7 +36,7 @@ jobs:
           known_hosts: 'hello-world'
           config: ${{ secrets.CONFIG }}
           if_key_exists: replace
-          source: "."
+          source: "/home/runner/work/actions_apps/actions_apps"
           target: "/var/www/cicd/actions_apps"
 
       - name: Executing remote command
