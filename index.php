@@ -6,6 +6,6 @@
     <title>PHP Action Github</title>
 </head>
 <body>
-    <h3>Welcome to PHP</h3>
+    <h3>Welcome to PHP RIFQI</h3>
 </body>
 </html>
