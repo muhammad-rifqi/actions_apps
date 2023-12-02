@@ -1,6 +1,10 @@
-on: push
+name: Deploy
+on:
+  push:
+    branches: 
+     - main
 jobs:
-  first-job:
+  deploy:
     runs-on: ubuntu-latest
-    container: 'centos:latest'
-      - run: php -v
+    steps:
+      -run: php -v
