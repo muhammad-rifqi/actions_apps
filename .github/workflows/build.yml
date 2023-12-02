@@ -9,15 +9,4 @@ jobs:
     steps:
       - name: Copy repository contents via git
         uses: actions/checkout@v3
-      - name: Install SSH Key
-        uses: actions_apps/ssh-key-action@v2
-        with:
-          ssh-private-key: ${{ secrets.SSH_KEY }} 
-      - name: Copy files into the server
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          source: ./
-          target: /var/www/html/cicd 
+     
