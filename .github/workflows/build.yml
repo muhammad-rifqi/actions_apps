@@ -42,6 +42,11 @@ jobs:
       - name: Executing remote command
         uses: shimataro/ssh-key-action@v2
         with:
+          key: ${{ secrets.SSH_KEY }} 
+          name: id_rsa
+          known_hosts: 'hello-world'
+          config: ${{ secrets.CONFIG }}
+          if_key_exists: replace
           HOST: ${{ secrets.HOST }}
           USERNAME: ${{ secrets.USERNAME }}
           PORT: ${{ secrets.PORT }}
