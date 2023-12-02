@@ -24,6 +24,7 @@ jobs:
         #   rsync -r . ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/var/www/html/cicd/${{ github.event.repository.name }}
           
       #   uses: actions/setup-ssh-key@v3
+        uses: shimataro/ssh-key-action@v2
         env:
           HOST: ${{ secrets.HOST }}
           USERNAME: ${{ secrets.USERNAME }}
