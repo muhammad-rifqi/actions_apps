@@ -39,6 +39,15 @@ jobs:
           source: "."
           target: "/var/www/cicd/actions_apps"
 
+      - name: Executing remote command
+        uses: shimataro/ssh-key-action@v2
+        with:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          KEY: ${{ secrets.SSH_KEY }}
+          script: ls
+
       # - name: Executing remote command
       #   uses: actions/setup-ssh-key@v3
       #   with:
