@@ -7,4 +7,5 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      -run: php -v
+      - uses: Print Version
+      - name: php -v
