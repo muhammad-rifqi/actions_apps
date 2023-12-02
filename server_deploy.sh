@@ -5,4 +5,4 @@ echo "Deploying application ..."
 
 git pull origin main
 
-echo "🚀 Application deployed!"
+echo "Application deployed!"
