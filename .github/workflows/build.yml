@@ -7,5 +7,5 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: Print Version
-      - name: php -v
+      - uses: actions/checkout@v3
+      - name: Check out code
