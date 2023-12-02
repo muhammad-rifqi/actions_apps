@@ -10,10 +10,27 @@ jobs:
       - name: Copy repository contents via git
         uses: actions/checkout@v3
       - name: Install SSH Key
-        run: 'echo "$SSH_KEY" > key'
-        shell: bash
+        uses: actions/setup-ssh-key@v3
         env:
-          SSH_KEY: ${{secrets.USERNAME}}
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          KEY: ${{ secrets.SSH_KEY }}
+        with:
+          source: "./"
+          target: "/var/www/cicd/actions_apps"
+
+      - name: Executing remote command
+        uses: appleboy/ssh-action@master
+        with:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          KEY: ${{ secrets.SSH_KEY }}
+          script: ls
+
+
+
       # - name: Install SSH Key
       #   uses: actions_apps/ssh-key-action@v2
       #   with:
