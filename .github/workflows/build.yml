@@ -11,19 +11,11 @@ jobs:
         name: Copy repository contents via scp
       - uses: myapps/ssh-key-action@v2
         name: Install SSH Key
-        env:
-          HOST: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          PORT: ${{ secrets.PORT }}
-          KEY: ${{ secrets.SSH_KEY }}
-        with:
-          source: "."
-          target: "/var/www/html/cicd/actions_apps"
-      - uses: myapps/ssh-key-action@v2
-        name: Executing remote command
-        with:
-          HOST: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          PORT: ${{ secrets.PORT }}
-          KEY: ${{ secrets.SSH_KEY }}
-          script: ls
+          with:
+            key: ${{ secrets.SSH_KEY }} 
+            known_hosts: 'hello-world'
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+      - name: sync
+        run: |
+          rsync -avz . ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/var/www/html/cicd/${{ github.event.repository.name }}
