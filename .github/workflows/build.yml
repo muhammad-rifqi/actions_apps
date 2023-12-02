@@ -7,10 +7,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Copy repository contents via scp
-        uses: actions/checkout@v3
-      - name: Install SSH Key
-        uses: myapps/ssh-key-action@v2
+      - uses: actions/checkout@v3
+        name: Copy repository contents via scp
+      - uses: myapps/ssh-key-action@v2
+        name: Install SSH Key
         env:
           HOST: ${{ secrets.HOST }}
           USERNAME: ${{ secrets.USERNAME }}
@@ -19,11 +19,11 @@ jobs:
         with:
           source: "."
           target: "/var/www/html/cicd/actions_apps"
-      - name: Executing remote command
-        uses: myapps/ssh-key-action@v2
-      with:
-        host: ${{ secrets.HOST }}
-        USERNAME: ${{ secrets.USERNAME }}
-        PORT: ${{ secrets.PORT }}
-        KEY: ${{ secrets.SSHKEY }}
-        script: ls
+      - uses: myapps/ssh-key-action@v2
+        name: Executing remote command
+        with:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          KEY: ${{ secrets.SSHKEY }}
+          script: ls
