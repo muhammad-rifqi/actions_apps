@@ -13,9 +13,11 @@ jobs:
         uses: actions_apps/ssh-key-action@v2
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }} 
-          known_hosts: 'hello-world'
-      - name: Adding Known Hosts
-        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-      - name: sync
-        run: |
-          rsync -avz . ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/var/www/html/cicd/${{ github.event.repository.name }}
+      - name: Copy files into the server
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          source: ./
+          target: /var/www/html/cicd 
