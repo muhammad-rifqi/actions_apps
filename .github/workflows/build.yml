@@ -35,7 +35,7 @@ jobs:
           name: id_rsa
           known_hosts: 'hello-world'
           config: ${{ secrets.CONFIG }}
-          if_key_exists: fail
+          if_key_exists: replace
           source: "."
           target: "/var/www/cicd/actions_apps"
 
