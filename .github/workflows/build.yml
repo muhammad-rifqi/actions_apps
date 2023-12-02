@@ -20,18 +20,18 @@ jobs:
       - name: Adding Known Hosts
         run: ssh-keyscan -H ${{ secrets.HOST }} >> cd /root/.ssh/known_hosts
       - name: rsync over SSH
-        run: |
-          rsync -r . ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/var/www/html/cicd/${{ github.event.repository.name }}
+        # run: |
+        #   rsync -r . ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/var/www/html/cicd/${{ github.event.repository.name }}
           
       #   uses: actions/setup-ssh-key@v3
-      #   env:
-      #     HOST: ${{ secrets.HOST }}
-      #     USERNAME: ${{ secrets.USERNAME }}
-      #     PORT: ${{ secrets.PORT }}
-      #     KEY: ${{ secrets.SSH_KEY }}
-      #   with:
-      #     source: "./"
-      #     target: "/var/www/cicd/actions_apps"
+        env:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          KEY: ${{ secrets.SSH_KEY }}
+        with:
+          source: "."
+          target: "/var/www/cicd/actions_apps"
 
       # - name: Executing remote command
       #   uses: actions/setup-ssh-key@v3
