@@ -19,9 +19,9 @@ jobs:
           if_key_exists: fail
       - name: Adding Known Hosts
         run: ssh-keyscan -H ${{ secrets.HOST }} >> cd /root/.ssh/known_hosts
-      - name: sync
+      - name: rsync over SSH
         run: |
-          rsync -r ./ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/var/www/html/cicd/${{ github.event.repository.name }}
+          rsync -r . ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/var/www/html/cicd/${{ github.event.repository.name }}
           
       #   uses: actions/setup-ssh-key@v3
       #   env:
