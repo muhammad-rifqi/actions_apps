@@ -11,8 +11,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Install SSH Key
         uses: actions_apps/ssh-key-action@v2
-       env:
-        TOKEN_CUSTOM: ${{ secrets.TOKEN_CUSTOM }}
-      with:
-        source: "."
-        target: "/var/www/html/cicd/actions_apps"
+        env:
+          TOKEN_CUSTOM: ${{ secrets.TOKEN_CUSTOM }}
+        with:
+          source: "."
+          target: "/var/www/html/cicd/actions_apps"
