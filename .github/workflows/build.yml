@@ -31,6 +31,11 @@ jobs:
           PORT: ${{ secrets.PORT }}
           KEY: ${{ secrets.SSH_KEY }}
         with:
+          key: ${{ secrets.SSH_KEY }} 
+          name: id_rsa
+          known_hosts: 'hello-world'
+          config: ${{ secrets.CONFIG }}
+          if_key_exists: fail
           source: "."
           target: "/var/www/cicd/actions_apps"
 
